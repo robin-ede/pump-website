@@ -1,0 +1,160 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: url('../images/bg.jpeg') no-repeat center center fixed; /* Updated to use bg.jpg */
+    background-size: cover; /* Ensures the image covers the entire background */
+    color: white;
+    overflow: hidden; /* Prevents scrollbars if snowflakes fall outside the viewport */
+}
+
+.hero {
+    text-align: center;
+    position: relative;
+    height: calc(100vh - 150px); /* Adjusted height to account for social media icons */
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box; /* Ensures padding doesn't overflow */
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adds a semi-transparent overlay for better readability */
+    z-index: -1; /* Places it behind all content */
+}
+
+.mike-tyson img {
+    width: 180px; /* Slightly smaller for better scaling */
+    height: 180px;
+    border-radius: 50%; /* Makes the image circular */
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Optional shadow for a polished look */
+    object-fit: cover; /* Ensures the image fills the circle */
+}
+
+.countdown {
+    text-align: center;
+    margin-bottom: 30px; /* Adds space below the countdown */
+}
+
+.countdown p {
+    font-size: 2em; /* Increased size for better visibility */
+    margin: 0 0 10px;
+    color: #fff;
+}
+
+.countdown span {
+    font-size: 3em; /* Increased size for better visibility */
+    font-weight: bold;
+    color: #f0f0f0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Adds a festive shadow effect */
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1.4em;
+    background-color: #f00;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Adds depth to the button */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+    margin-top: 20px; /* Adds space above the button */
+}
+
+button:hover {
+    background-color: #c00;
+    transform: scale(1.1); /* Slightly enlarges the button */
+}
+
+.snowflake {
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    color: white;
+    user-select: none;
+    pointer-events: none;
+    font-size: 1.5em; /* Adjust snowflake size */
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh); /* Starts slightly above the viewport */
+        opacity: 1; /* Fully visible at start */
+    }
+    90% {
+        opacity: 1; /* Visible while falling */
+    }
+    100% {
+        transform: translateY(100vh); /* Ends below the viewport */
+        opacity: 0; /* Fades out */
+    }
+}
+
+/* Optional: Add animation delay and duration for dynamic snowfall */
+.snowfall div {
+    position: absolute;
+    top: 0;
+    animation-duration: 10s; /* Duration for snowflake to fall */
+    animation-delay: calc(-1s * var(--i)); /* Staggers snowflake fall */
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    margin: 20px 0;
+    position: fixed;
+    bottom: 50px; /* Position closer to the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.social-button {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.icon-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Crops the image into a circle */
+    overflow: hidden; /* Ensures content outside the circle is hidden */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Optional shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fits within the circle */
+}
+
+.icon-wrapper:hover {
+    transform: scale(1.2); /* Enlarges the button on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Adds a larger shadow on hover */
+}
