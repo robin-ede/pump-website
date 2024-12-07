@@ -1,82 +1,84 @@
+html {
+    font-size: 16px; /* Base font-size for rem calculations */
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background: url('../images/bg.jpeg') no-repeat center center fixed; /* Updated to use bg.jpg */
-    background-size: cover; /* Ensures the image covers the entire background */
+    background: url('../images/bg.jpeg') no-repeat center center fixed;
+    background-size: cover;
     color: white;
-    overflow: hidden; /* Prevents scrollbars if snowflakes fall outside the viewport */
-}
-
-.hero {
-    text-align: center;
-    position: relative;
-    height: calc(100vh - 150px); /* Adjusted height to account for social media icons */
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box; /* Ensures padding doesn't overflow */
 }
 
 .backdrop {
-    position: fixed;
+    position: absolute; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Adds a semi-transparent overlay for better readability */
-    z-index: -1; /* Places it behind all content */
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1; 
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vw 2rem; 
+    text-align: center;
+    min-height: 90vh;
+}
+
+.hero h1, .hero h2 {
+    margin: 0.5em 0;
+    line-height: 1.2;
+}
+
+/* Add some spacing to separate the image and countdown from the title text */
+.mike-tyson {
+    margin-top: 2rem; 
 }
 
 .mike-tyson img {
-    width: 180px; /* Slightly smaller for better scaling */
-    height: 180px;
-    border-radius: 50%; /* Makes the image circular */
-    margin: 20px auto;
-    display: block;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Optional shadow for a polished look */
-    object-fit: cover; /* Ensures the image fills the circle */
+    width: 15vw;
+    max-width: 180px;
+    border-radius: 50%;
+    height: auto;
+}
+
+/* Unified text-shadow for headers and countdown text */
+.hero h1, 
+.hero h2, 
+.countdown p, 
+.countdown span {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .countdown {
-    text-align: center;
-    margin-bottom: 30px; /* Adds space below the countdown */
+    margin-top: 2rem; /* Additional spacing above the countdown */
+    margin-bottom: 2rem;
 }
 
 .countdown p {
-    font-size: 2em; /* Increased size for better visibility */
+    font-size: 2rem;
     margin: 0 0 10px;
-    color: #fff;
 }
 
 .countdown span {
-    font-size: 3em; /* Increased size for better visibility */
+    font-size: 3rem;
     font-weight: bold;
-    color: #f0f0f0;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Adds a festive shadow effect */
 }
 
-button {
-    padding: 12px 25px;
-    font-size: 1.4em;
-    background-color: #f00;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Adds depth to the button */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
-    margin-top: 20px; /* Adds space above the button */
-}
+/* Button styles removed since the button is no longer in use */
 
-button:hover {
-    background-color: #c00;
-    transform: scale(1.1); /* Slightly enlarges the button */
-}
-
+/* Snowflake and Snow Container */
 .snowflake {
     position: absolute;
     top: 0;
@@ -84,77 +86,115 @@ button:hover {
     color: white;
     user-select: none;
     pointer-events: none;
-    font-size: 1.5em; /* Adjust snowflake size */
+    font-size: 1.5rem;
     animation-name: fall;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Prevent scrollbars from appearing due to snowflakes */
+    pointer-events: none; 
+    z-index: 9999; 
+}
+
 @keyframes fall {
     0% {
-        transform: translateY(-10vh); /* Starts slightly above the viewport */
-        opacity: 1; /* Fully visible at start */
+        transform: translateY(-10vh);
+        opacity: 1;
     }
     90% {
-        opacity: 1; /* Visible while falling */
+        opacity: 1;
     }
     100% {
-        transform: translateY(100vh); /* Ends below the viewport */
-        opacity: 0; /* Fades out */
+        transform: translateY(100vh);
+        opacity: 0;
     }
 }
 
-/* Optional: Add animation delay and duration for dynamic snowfall */
 .snowfall div {
     position: absolute;
     top: 0;
-    animation-duration: 10s; /* Duration for snowflake to fall */
-    animation-delay: calc(-1s * var(--i)); /* Staggers snowflake fall */
+    animation-duration: 10s;
+    animation-delay: calc(-1s * var(--i));
 }
 
+/* Social media icons */
 .social-media {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 80px;
-    margin: 20px 0;
-    position: fixed;
-    bottom: 50px; /* Position closer to the bottom */
+    gap: 2rem;
+    position: fixed;  
+    bottom: 20px;  
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
+    padding: 1rem;
 }
 
 .social-button {
-    width: 120px;
-    height: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-decoration: none;
+    width: clamp(60px, 10vw, 120px); 
+    height: clamp(60px, 10vw, 120px);
 }
 
 .icon-wrapper {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%; /* Crops the image into a circle */
-    overflow: hidden; /* Ensures content outside the circle is hidden */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Optional shadow for depth */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .icon-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image fits within the circle */
+    object-fit: cover;
 }
 
 .icon-wrapper:hover {
-    transform: scale(1.2); /* Enlarges the button on hover */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Adds a larger shadow on hover */
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* MEDIA QUERIES FOR SMALLER SCREENS */
+@media (max-width: 600px) {
+    .hero {
+        padding: 2rem 1rem;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero h2 {
+        font-size: 1.2rem;
+    }
+
+    .mike-tyson img {
+        width: 40vw;
+        max-width: 120px;
+    }
+
+    .social-media {
+        gap: 1rem;
+    }
+
+    .countdown p {
+        font-size: 1.5rem;
+    }
+
+    .countdown span {
+        font-size: 2rem;
+    }
 }

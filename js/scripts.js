@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const snowContainer = document.querySelector('.snow-container');
     const timerElement = document.getElementById('countdown-timer');
-    const followButton = document.getElementById('follow-button');
-    const body = document.body;
+    // const followButton = document.getElementById('follow-button');
+    const mikeTysonImage = document.querySelector('.mike-tyson img'); // Get the image element
 
     // Countdown Timer Logic
-    const christmasDate = new Date("December 25, 2024 00:00:00").getTime();
+    const christmasDate = new Date("December 14, 2024 17:00:00").getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Display the countdown in "Days HH:MM:SS" format
         timerElement.innerHTML = `
             <p>Countdown to Launch:</p>
-            <span>${formatNumber(days)} days ${formatNumber(hours)}:${formatNumber(minutes)}:${formatNumber(seconds)}</span>
+            <span>${formatNumber(days)}D ${formatNumber(hours)}:${formatNumber(minutes)}:${formatNumber(seconds)}</span>
         `;
     }
 
@@ -41,19 +42,15 @@ document.addEventListener("DOMContentLoaded", function() {
         snowflake.style.opacity = Math.random();
         snowflake.style.fontSize = Math.random() * 10 + 10 + "px";
         snowflake.textContent = "❄";
-        body.appendChild(snowflake);
+        snowContainer.appendChild(snowflake);
 
         setTimeout(() => {
             snowflake.remove();
         }, 5000);
     }
 
-    followButton.addEventListener("click", function() {
-        const bellSound = new Audio('images/bell_sound.mp3');
-        bellSound.play();
-        alert("Thank you for following! Enjoy the snow!");
-        
-        // Start snowfall for a limited time
+    // Attach the snowfall trigger to Mike Tyson's image
+    mikeTysonImage.addEventListener("click", function() {
         const snowInterval = setInterval(createSnowflake, 100);
         setTimeout(() => clearInterval(snowInterval), 5000); // Snowfall lasts 5 seconds
     });
