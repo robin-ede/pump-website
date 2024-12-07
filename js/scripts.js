@@ -1,57 +1,53 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const snowContainer = document.querySelector('.snow-container');
     const timerElement = document.getElementById('countdown-timer');
-    // const followButton = document.getElementById('follow-button');
-    const mikeTysonImage = document.querySelector('.mike-tyson img'); // Get the image element
+    const mikeTysonImage = document.querySelector('.mike-tyson img');
 
-    // Countdown Timer Logic
-    const christmasDate = new Date("December 14, 2024 17:00:00").getTime();
+    // Set target time in CST
+    const targetTimeCST = new Date("December 14, 2024 17:00:00-06:00").getTime();
 
     function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = christmasDate - now;
+        const nowUTC = new Date().getTime(); // Get current time in UTC
+        const distance = targetTimeCST - nowUTC;
 
-        if (distance < 0) {
+        if (distance <= 0) {
             timerElement.textContent = "Merry Christmas!";
             return;
         }
 
+        // Calculate time components
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Format numbers to always show two digits
-        const formatNumber = (num) => String(num).padStart(2, '0');
-
-        // Display the countdown in "Days HH:MM:SS" format
+        // Display countdown
         timerElement.innerHTML = `
             <p>Countdown to Launch:</p>
-            <span>${formatNumber(days)}D ${formatNumber(hours)}:${formatNumber(minutes)}:${formatNumber(seconds)}</span>
+            <span>${String(days).padStart(2, '0')}D ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}</span>
         `;
     }
 
+    // Update countdown every second
     setInterval(updateCountdown, 1000);
 
-    // Falling Snow Effect
+    // Create a single snowflake
     function createSnowflake() {
         const snowflake = document.createElement("div");
         snowflake.classList.add("snowflake");
-        snowflake.style.left = Math.random() * window.innerWidth + "px";
-        snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+        snowflake.style.left = `${Math.random() * window.innerWidth}px`;
+        snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
         snowflake.style.opacity = Math.random();
-        snowflake.style.fontSize = Math.random() * 10 + 10 + "px";
+        snowflake.style.fontSize = `${Math.random() * 10 + 10}px`;
         snowflake.textContent = "❄";
         snowContainer.appendChild(snowflake);
 
-        setTimeout(() => {
-            snowflake.remove();
-        }, 5000);
+        setTimeout(() => snowflake.remove(), 5000);
     }
 
-    // Attach the snowfall trigger to Mike Tyson's image
-    mikeTysonImage.addEventListener("click", function() {
+    // Trigger snowfall when Mike Tyson's image is clicked
+    mikeTysonImage.addEventListener("click", () => {
         const snowInterval = setInterval(createSnowflake, 100);
-        setTimeout(() => clearInterval(snowInterval), 5000); // Snowfall lasts 5 seconds
+        setTimeout(() => clearInterval(snowInterval), 5000); // Stop snowfall after 5 seconds
     });
 });
